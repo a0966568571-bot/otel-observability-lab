@@ -1,0 +1,28 @@
+# Assignment 8 - Task 3 (O level): context propagation across two services
+# frontend + backend --OTLP:4317--> collector --> debug + file + Jaeger (UI on :16686)
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+
+processors:
+  batch:
+
+exporters:
+  debug:
+    verbosity: basic             # one line per batch; Jaeger is now the main view
+  file:
+    path: /out/telemetry-o.json  # raw copy, used to check the Jaeger view against the data
+  otlp_grpc/jaeger:
+    endpoint: jaeger:4317        # Jaeger container name on the shared docker network
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, file, otlp_grpc/jaeger]

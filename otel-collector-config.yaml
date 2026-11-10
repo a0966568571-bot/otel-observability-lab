@@ -1,0 +1,24 @@
+# Assignment 8 - Task 2 (E level)
+# app --OTLP/gRPC:4317--> receiver --> batch processor --> debug + file exporters
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317   # must be 0.0.0.0, localhost is unreachable from outside the container
+
+processors:
+  batch:                         # group spans before export (fewer, larger writes)
+
+exporters:
+  debug:
+    verbosity: detailed          # print every span to the container log (docker logs)
+  file:
+    path: /out/telemetry.json    # one JSON line per batch, written to the mounted ./out folder
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, file]
