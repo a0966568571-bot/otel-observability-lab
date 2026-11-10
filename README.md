@@ -1,6 +1,6 @@
 # Assignment 8: Observability with OpenTelemetry
 
-Code for my OpenTelemetry lab (DevOps course, Assignment 8). CHANGYENJUNG.
+Code for my OpenTelemetry lab (DevOps course, Assignment 8). 張晏榕.
 
 | Task | Level | What it does |
 |---|---|---|
