@@ -31,7 +31,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Python 3.9 or newer is needed. My Anaconda Python was 3.8, so I used the Homebrew Python instead.
+Python 3.10 or newer is needed (opentelemetry-sdk 1.45.2). My Anaconda Python was 3.8, so I used the Homebrew Python instead.
 
 ## Task 1 (A): console output
 
